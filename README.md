@@ -64,4 +64,4 @@ You can do it either by ```clientID``` or ```clientName``` so it's really easy t
 Contributions
 --------------
 
-Feel free to fork the repo and create PR with improvements. g
+Feel free to fork the repo and create PR with improvements. 
