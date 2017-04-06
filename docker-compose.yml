@@ -1,0 +1,29 @@
+version: '2'
+services:
+  mysql-database:
+      image: mysql:5.5
+      container_name: auth0-mysql
+      environment:
+        - MYSQL_DATABASE=auth0-test
+        - MYSQL_ALLOW_EMPTY_PASSWORD=1
+
+  php-fpm:
+      build: ./docker/php
+      container_name: auth0-php
+      links:
+        - mysql-database:mysql.auth0-test.dev
+      volumes:
+        - ./docker/php/php.ini:/usr/local/etc/php/conf.d/99-custom.ini
+        - .:/srv/www/app
+
+  nginx:
+      image: nginx:1.7
+      container_name: auth0-nginx
+      ports:
+        - "5500:5500"
+      links:
+        - php-fpm:php.auth0-test.dev
+      volumes:
+        - ./docker/nginx/nginx.conf:/etc/nginx/nginx.conf
+      volumes_from:
+        - php-fpm

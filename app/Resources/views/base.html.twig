@@ -1,0 +1,13 @@
+<script src="https://cdn.auth0.com/js/lock/10.12.1/lock.min.js"></script>
+<script>
+  var lock = new Auth0Lock('dtIcPX2tNg8bQqvUm0zlNtgEXUrW2NDF', 'bojandimitrovski.eu.auth0.com', {
+    auth: {
+      redirectUrl: 'http://localhost:5500/auth0/callback',
+      responseType: 'code',
+      params: {
+        scope: 'openid email' // Learn about scopes: https://auth0.com/docs/scopes
+      }
+    }
+  });
+</script>
+<button onclick="lock.show();">Login</button>
