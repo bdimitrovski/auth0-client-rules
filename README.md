@@ -1,69 +1,67 @@
-Symfony Standard Edition
+Auth0 Client Rules
 ========================
 
-Welcome to the Symfony Standard Edition - a fully-functional Symfony
-application that you can use as the skeleton for your new applications.
+This small Symfony app lists all the clients and rules associated with them. If you've used Auth0 before (https://auth0.com/), you should already be familiar with the concept of rules.
 
-For details on how to download and get started with Symfony, see the
-[Installation][1] chapter of the Symfony Documentation.
+By default, all Auth0 rules are applied to all client applications. Sometimes, we need to apply only some rules to some applications. This app will help you do that.
 
-What's inside?
+![alt tag](http://g.recordit.co/akTTFCnMAz.gif)
+
+Usage & requirements
 --------------
 
-The Symfony Standard Edition is configured with the following defaults:
+Since this example app uses Docker, you will need to have it installed on your system. After you clone this repo, take the following steps:
 
-  * An AppBundle you can use to start coding;
+  * make build && make up && make install
 
-  * Twig as the only configured template engine;
+  * Once the container is built, follow the steps from here https://auth0.com/docs/quickstart/webapp/symfony to configure the app with your data (you will need to be logged in to your Auth0 account to see pre-populated data).
 
-  * Doctrine ORM/DBAL;
+  * Make sure you have a valid token for calling the Auth0 Management APIv2 token: https://auth0.com/docs/api/management/v2/tokens and replace the following with your specific data in ```ClientRulesController.php```:
 
-  * Swiftmailer;
+  ``` const AUDIENCE = <YOUR_AUDIENCE_URL>
+  const DOMAIN = <YOUR_AUTH0_DOMAIN>
+  const CLIENT_ID = <YOUR_CLIENT_ID>
+  const CLIENT_SECRET = <YOUR_CLIENT_SECRET>
+  ```
 
-  * Annotations enabled for everything.
+  * Once you're done, run the app at http://localhost:5500/clients/rules and login - you should then see all the rules for all clients.
 
-It comes pre-configured with the following bundles:
+  * That's it! Make sure you have allowed only specific users to access the client by using the whitelist rule from your app (https://manage.auth0.com/#/rules). It should look something like this:
 
-  * **FrameworkBundle** - The core Symfony framework bundle
+```javascript
+  function (user, context, callback) {
+    var whitelist = [ 'AllowedUser1@gmail.com', 'AnotherOne@somemail.com' ];  //authorized users
+    var userHasAccess = whitelist.some(
+      function (email) {
+        return email === user.email;
+      });
 
-  * [**SensioFrameworkExtraBundle**][6] - Adds several enhancements, including
-    template and routing annotation capability
+    if (!userHasAccess) {
+      return callback(new UnauthorizedError('Access denied.'));
+    }
 
-  * [**DoctrineBundle**][7] - Adds support for the Doctrine ORM
+  }
+    callback(null, user, context);
+}
+```
 
-  * [**TwigBundle**][8] - Adds support for the Twig templating engine
+Prerequisites
+--------------
 
-  * [**SecurityBundle**][9] - Adds security by integrating Symfony's security
-    component
+In order to display rules for some clients only, you have to configure your rules like this:
 
-  * [**SwiftmailerBundle**][10] - Adds support for Swiftmailer, a library for
-    sending emails
+```javascript
+  function (user, context, callback) {
+    if (context.clientName === 'MyAppToWhiteList' || context.clientName === 'AnotherAppToWhiteList' || context.clientID === '123456789') {
+       // Your rule logic
+     }
+      callback(null, user, context);
+}
+```
 
-  * [**MonologBundle**][11] - Adds support for Monolog, a logging library
+You can do it either by ```clientID``` or ```clientName``` so it's really easy to do it in any fashion you like.
 
-  * **WebProfilerBundle** (in dev/test env) - Adds profiling functionality and
-    the web debug toolbar
+Contributions
+--------------
 
-  * **SensioDistributionBundle** (in dev/test env) - Adds functionality for
-    configuring and working with Symfony distributions
-
-  * [**SensioGeneratorBundle**][13] (in dev/test env) - Adds code generation
-    capabilities
-
-  * **DebugBundle** (in dev/test env) - Adds Debug and VarDumper component
-    integration
-
-All libraries and bundles included in the Symfony Standard Edition are
-released under the MIT or BSD license.
-
-Enjoy!
-
-[1]:  https://symfony.com/doc/3.2/setup.html
-[6]:  https://symfony.com/doc/current/bundles/SensioFrameworkExtraBundle/index.html
-[7]:  https://symfony.com/doc/3.2/doctrine.html
-[8]:  https://symfony.com/doc/3.2/templating.html
-[9]:  https://symfony.com/doc/3.2/security.html
-[10]: https://symfony.com/doc/3.2/email.html
-[11]: https://symfony.com/doc/3.2/logging.html
-[12]: https://symfony.com/doc/3.2/assetic/asset_management.html
-[13]: https://symfony.com/doc/current/bundles/SensioGeneratorBundle/index.html
+Feel free to fork the repo and create PR with improvements. g
