@@ -10,13 +10,13 @@ By default, all Auth0 rules are applied to all client applications. Sometimes, w
 Usage & requirements
 --------------
 
-Since this example app uses Docker, you will need to have it installed on your system. After you clone this repo, take the following steps:
+Since this example app uses Docker, you will need to have it installed on your system - download and install it from here: https://www.docker.com/. After you clone this repo, take the following steps:
 
-  * make build && make up && make install
+  * Run ```make build && make up && make install``` from the project.
 
   * Once the container is built, follow the steps from here https://auth0.com/docs/quickstart/webapp/symfony to configure the app with your data (you will need to be logged in to your Auth0 account to see pre-populated data).
 
-  * Make sure you have a valid token for calling the Auth0 Management APIv2 token: https://auth0.com/docs/api/management/v2/tokens and replace the following with your specific data in ```ClientRulesController.php```:
+  * Make sure you create a valid token for calling the Auth0 Management APIv2: https://auth0.com/docs/api/management/v2/tokens - replace the following with your specific data in ```src/Controller/ClientRulesController.php```:
 
   ``` const AUDIENCE = <YOUR_AUDIENCE_URL>
   const DOMAIN = <YOUR_AUTH0_DOMAIN>
@@ -64,4 +64,4 @@ You can do it either by ```clientID``` or ```clientName``` so it's really easy t
 Contributions
 --------------
 
-Feel free to fork the repo and create PR with improvements. 
+Feel free to fork the repo and create PR with improvements.
