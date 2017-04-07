@@ -9,6 +9,21 @@ By default, all Auth0 rules are applied to all client applications. Sometimes, w
 
 In the app, you will see that the rules which apply to some specific clients only will be displayed in green color, while the rules which apply to all clients will be displayed in a yellow color.
 
+In order to display rules for some clients only, you have to configure your rules like this:
+
+```javascript
+  function (user, context, callback) {
+    if (context.clientName === 'MyAppToWhiteList' || context.clientName === 'AnotherAppToWhiteList' || context.clientID === '123456789') {
+       // Your rule logic
+     }
+      callback(null, user, context);
+}
+```
+
+You can do it either by ```clientID``` or ```clientName``` so it's really easy to do it in any fashion you like.
+
+![alt tag](http://g.recordit.co/PiFkyOLX3p.gif)
+
 Usage & requirements
 --------------
 
@@ -46,22 +61,6 @@ Since this example app uses Docker, you will need to have it installed on your s
     callback(null, user, context);
 }
 ```
-
-Prerequisites
---------------
-
-In order to display rules for some clients only, you have to configure your rules like this:
-
-```javascript
-  function (user, context, callback) {
-    if (context.clientName === 'MyAppToWhiteList' || context.clientName === 'AnotherAppToWhiteList' || context.clientID === '123456789') {
-       // Your rule logic
-     }
-      callback(null, user, context);
-}
-```
-
-You can do it either by ```clientID``` or ```clientName``` so it's really easy to do it in any fashion you like.
 
 Contributions
 --------------
