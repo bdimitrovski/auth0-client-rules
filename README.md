@@ -5,7 +5,7 @@ This small Symfony app lists all the clients and rules associated with them. If 
 
 By default, all Auth0 rules are applied to all client applications. Sometimes, we need to apply only some rules to some applications. This app will help you do that.
 
-![alt tag](http://g.recordit.co/akTTFCnMAz.gif)
+![alt tag](http://g.recordit.co/ca4sN2vXoC.gif)
 
 Usage & requirements
 --------------

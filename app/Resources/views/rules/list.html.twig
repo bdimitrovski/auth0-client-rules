@@ -1,5 +1,6 @@
 <!doctype html>
 <html>
+
 <head>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
@@ -7,6 +8,7 @@
     <script src="{{ asset('assets/js/jquery-3.2.0.min.js') }}"></script>
     <script src="{{ asset('assets/js/app.js') }}"></script>
 </head>
+
 <body>
     <div class="container">
         {% for client in clients %}
@@ -16,15 +18,16 @@
                     <div class="panel-heading">
                         <h3 class="panel-title">{{ client.name }}</h3>
                         <span class="pull-right clickable">
-                          <span class="rules-toggle">Rules</span>
+                       <span class="rules-toggle">Rules</span>
                         <i class="glyphicon glyphicon-chevron-up"></i>
                         </span>
                     </div>
                     {% for rule in client.rules %}
-                    <div class="panel-body hidden">
+                    <div class="panel-body">
                         <div class="alert alert-success">{{ rule }}</div>
                     </div>
-                    {% endfor %} {% for rule in all_clients %}
+                    {% endfor %}
+                    {% for rule in all_clients %}
                     <div class="panel-body">
                         <div class="alert alert-warning">{{ rule }}</div>
                     </div>
@@ -35,4 +38,5 @@
         {% endfor %}
     </div>
 </body>
+
 </html>

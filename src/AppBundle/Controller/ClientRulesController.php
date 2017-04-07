@@ -19,7 +19,7 @@ class ClientRulesController extends Controller
     public function showClientsAndRules()
     {
 
-        // Send a token request
+        // Get the token and obtain client data from the /api/v2/clients endpoint.
         $base_url = 'https://' . urlencode(self::DOMAIN);
         $urlParams = [
             'client_id=' . urlencode(self::CLIENT_ID),
@@ -41,7 +41,6 @@ class ClientRulesController extends Controller
         $oauth = json_decode($result);
         $access_token = $oauth->access_token;
 
-        // Get all clients from the /api/v2/clients endpoint.
         $curl = curl_init();
         curl_setopt_array($curl, [
             CURLOPT_RETURNTRANSFER => 1,
@@ -80,7 +79,7 @@ class ClientRulesController extends Controller
         $res = json_decode($result);
 
         // Perform rule check based on clientID or name and render all rules for all clients
-        // and rules that apply to some clients only
+       // and rules that apply to some clients only
         foreach ($clients as $key => $client) {
             foreach ($res as $rule) {
                 if (
