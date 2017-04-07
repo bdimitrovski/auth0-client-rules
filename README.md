@@ -7,9 +7,7 @@ By default, all Auth0 rules are applied to all client applications. Sometimes, w
 
 ![alt tag](http://g.recordit.co/ca4sN2vXoC.gif)
 
-In the app, you will see that the rules which apply to some specific clients only will be displayed in green color, while the rules which apply to all clients will be displayed in a yellow color:
-
-![alt tag](http://g.recordit.co/pfUlKrFVdT.gif)
+In the app, you will see that the rules which apply to some specific clients only will be displayed in green color, while the rules which apply to all clients will be displayed in a yellow color.
 
 Usage & requirements
 --------------
