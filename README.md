@@ -9,7 +9,7 @@ By default, all Auth0 rules are applied to all client applications. Sometimes, w
 
 In the app, you will see that the rules which apply to some specific clients only will be displayed in green color, while the rules which apply to all clients will be displayed in a yellow color.
 
-In order to display rules for some clients only, you have to configure your rules like this:
+In order to apply rules for some clients only, you have to configure your rules like this:
 
 ```javascript
   function (user, context, callback) {
