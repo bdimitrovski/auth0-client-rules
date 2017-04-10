@@ -43,11 +43,17 @@ Since this example app uses Docker, you will need to have it installed on your s
 
   * Once you're done, run the app at http://localhost:5500/clients/rules and login - you should then see all the rules for all clients.
 
-  * That's it! Make sure you have allowed only specific users to access the client by using the whitelist rule from your app (https://manage.auth0.com/#/rules). It should look something like this:
+  * That's it! Make sure you have allowed only specific users to access the client by using the "Whitelist for specific app" rule from your app (https://manage.auth0.com/#/rules). It should look something like this:
 
 ```javascript
-  function (user, context, callback) {
-    var whitelist = [ 'AllowedUser1@gmail.com', 'AnotherOne@somemail.com' ];  //authorized users
+function (user, context, callback) {
+    // we just care about NameOfTheAppWithWhiteList or its id
+    // bypass this rule for every other app
+    if(context.clientName !== 'NameOfTheAppWithWhiteList' || context.clientId !== '123456789'){
+      return callback(null, user, context);
+    }
+
+    var whitelist = [ 'user1@example.com', 'user2@example.com' ]; //authorized users
     var userHasAccess = whitelist.some(
       function (email) {
         return email === user.email;
@@ -57,7 +63,6 @@ Since this example app uses Docker, you will need to have it installed on your s
       return callback(new UnauthorizedError('Access denied.'));
     }
 
-  }
     callback(null, user, context);
 }
 ```
