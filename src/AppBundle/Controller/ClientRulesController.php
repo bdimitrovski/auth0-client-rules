@@ -7,10 +7,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class ClientRulesController extends Controller
 {
-    const AUDIENCE = 'https://bojandimitrovski.eu.auth0.com/api/v2/';
-    const DOMAIN = 'bojandimitrovski.eu.auth0.com';
-    const CLIENT_ID = 'dtIcPX2tNg8bQqvUm0zlNtgEXUrW2NDF';
-    const CLIENT_SECRET = 'XiKo7JGbFoZRQn8H3c8ojGMNoNGkccJkK1o5F5LxExRdVGlxQ7a6QnWSPJVPTlJN';
+    const AUDIENCE = <YOUR_AUDIENCE_URL>;
+    const DOMAIN = <YOUR_AUTH0_DOMAIN>;
+    const CLIENT_ID = <YOUR_CLIENT_ID>;
+    const CLIENT_SECRET = <YOUR_CLIENT_SECRET>;
     const GRANT_TYPE = 'client_credentials';
 
     /**
